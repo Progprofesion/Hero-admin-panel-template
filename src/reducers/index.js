@@ -2,9 +2,9 @@ const initialState = {
     heroes: [],
     heroesLoadingStatus: 'idle',
     filters: [],
-    filtersLoadingStatus: 'idle',
-    activeFilter: 'all',
-    filteredHeroes: []
+    filesLoadingStatus: 'idle',
+    filteredHeroes: [],
+    activeFilter: 'all'
 }
 
 const reducer = (state = initialState, action) => {
@@ -18,13 +18,10 @@ const reducer = (state = initialState, action) => {
             return {
                 ...state,
                 heroes: action.payload,
-                // ЭТО МОЖНО СДЕЛАТЬ И ПО ДРУГОМУ
-                // Я специально показываю вариант с действиями тут, но более правильный вариант
-                // будет показан в следующем уроке
+                heroesLoadingStatus: 'idle',
                 filteredHeroes: state.activeFilter === 'all' ?
                     action.payload :
-                    action.payload.filter(item => item.element === state.activeFilter),
-                heroesLoadingStatus: 'idle'
+                    action.payload.filter(item => item.element === state.activeFilter)
             }
         case 'HEROES_FETCHING_ERROR':
             return {
@@ -34,20 +31,21 @@ const reducer = (state = initialState, action) => {
         case 'FILTERS_FETCHING':
             return {
                 ...state,
-                filtersLoadingStatus: 'loading'
+                filesLoadingStatus: 'loading',
+
             }
         case 'FILTERS_FETCHED':
             return {
                 ...state,
-                filters: action.payload,
-                filtersLoadingStatus: 'idle'
+                filesLoadingStatus: 'idle',
+                filters: action.payload
             }
-        case 'FILTERS_FETCHING_ERROR':
+        case 'FILTER_FETCHING_ERROR':
             return {
                 ...state,
-                filtersLoadingStatus: 'error'
+                filesLoadingStatus: 'error',
             }
-        case 'ACTIVE_FILTER_CHANGED':
+        case 'ACTIVE_FILTER_CHANGE':
             return {
                 ...state,
                 activeFilter: action.payload,
@@ -55,32 +53,18 @@ const reducer = (state = initialState, action) => {
                     state.heroes :
                     state.heroes.filter(item => item.element === action.payload)
             }
-        // Самая сложная часть - это показывать новые элементы по фильтрам
-        // при создании или удалении
-        case 'HERO_CREATED':
-            // Формируем новый массив    
-            let newCreatedHeroList = [...state.heroes, action.payload];
+        case 'HEROES_DELETED':
+            const newHeroes = state.heroes.filter(item => item.id !== action.payload)
             return {
                 ...state,
-                heroes: newCreatedHeroList,
-                // Фильтруем новые данные по фильтру, который сейчас применяется
+                heroes: newHeroes,
                 filteredHeroes: state.activeFilter === 'all' ?
-                    newCreatedHeroList :
-                    newCreatedHeroList.filter(item => item.element === state.activeFilter)
-            }
-        case 'HERO_DELETED':
-            // Формируем новый массив
-            const newHeroList = state.heroes.filter(item => item.id !== action.payload);
-            return {
-                ...state,
-                heroes: newHeroList,
-                // Фильтруем новые данные по фильтру, который сейчас применяется
-                filteredHeroes: state.activeFilter === 'all' ?
-                    newHeroList :
-                    newHeroList.filter(item => item.element === state.activeFilter)
+                    newHeroes :
+                    newHeroes.filter(item => item.element !== state.activeFilter)
             }
         default: return state
     }
+
 }
 
 export default reducer;
