@@ -2,8 +2,8 @@ const initialState = {
     heroes: [],
     heroesLoadingStatus: 'idle',
     filters: [],
-    filteredHero: [],
     activeFilter: 'all',
+    filteredHeroes: [],
     filtersLoadingStatus: 'idle'
 }
 
@@ -18,43 +18,38 @@ const reducer = (state = initialState, action) => {
             return {
                 ...state,
                 heroes: action.payload,
-                heroesLoadingStatus: 'idle',
-                filteredHero: state.activeFilter === 'all' ?
+                filteredHeroes: state.activeFilter === 'all' ?
                     action.payload :
-                    action.payload.filter(item => item.element === state.activeFilter)
+                    action.payload.filter(item => item.element === state.activeFilter),
+                heroesLoadingStatus: 'idle'
             }
         case 'HEROES_FETCHING_ERROR':
             return {
                 ...state,
                 heroesLoadingStatus: 'error'
             }
-        case 'HERO_DELETED':
-            const newHeroList = state.heroes.filter(item => item.id !== action.payload);
-            return {
-                ...state,
-                heroes: newHeroList,
-            }
         case 'FILTERS_FETCHING':
             return {
                 ...state,
-                filtersLoadingStatus: 'loading'
+                filtersLoadingStatus: 'loading',
             }
         case 'FILTERS_FETCHED':
             return {
                 ...state,
                 filtersLoadingStatus: 'idle',
-                filters: action.payload,
+                filters: action.payload
             }
         case 'FILTERS_FETCHING_ERROR':
             return {
                 ...state,
-                filtersLoadingStatus: 'error'
+                filtersLoadingStatus: 'error',
+
             }
-        case 'ACTIVE_FILTERS_CHANGE':
+        case 'ACTIVE_FILTER_CHANGED':
             return {
                 ...state,
                 activeFilter: action.payload,
-                filteredHero: action.payload === 'all' ?
+                filteredHeroes: action.payload === 'all' ?
                     state.heroes :
                     state.heroes.filter(item => item.element === action.payload)
             }
