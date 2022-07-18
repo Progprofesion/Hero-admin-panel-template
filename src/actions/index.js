@@ -36,18 +36,24 @@ export const filtersFetchingError = () => {
     }
 }
 
-export const activeFiltersChanged = (filter) => {
+export const activeFilterChanged = (filter) => {
     return {
-        type: 'ACTIVE_FILTERS_CHANGED',
+        type: 'ACTIVE_FILTER_CHANGED',
         payload: filter
     }
 }
 
-export const heroesDeleted = (id) => {
+export const heroDeleted = (id) => {
     return {
         type: 'HERO_DELETED',
         payload: id
     }
 }
 
+export const heroCreate = (data) => {
+    return {
+        type: 'HERO_CREATE',
+        payload: data
+    }
+}
 

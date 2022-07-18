@@ -1,7 +1,7 @@
 import { useHttp } from '../../hooks/http.hook';
-import { useDispatch, useSelector } from 'react-redux';
 import { useEffect } from 'react';
-import { filtersFetching, filtersFetched, filtersFetchingError, activeFiltersChanged } from '../../actions/index';
+import { useDispatch, useSelector } from 'react-redux';
+import { filtersFetching, filtersFetched, filtersFetchingError, activeFilterChanged } from '../../actions/index';
 import Spinner from '../spinner/Spinner';
 import classNames from 'classnames';
 // Задача для этого компонента:
@@ -13,22 +13,24 @@ import classNames from 'classnames';
 
 const HeroesFilters = () => {
 
-    const { filters, filtersLoadingStatus, activeFilters } = useSelector(state => state);
+    const { filters, activeFilter, filtersLoadingStatus } = useSelector(state => state)
+
     const { request } = useHttp();
     const dispatch = useDispatch();
 
     useEffect(() => {
-        dispatch(filtersFetching())
-        request('http://localhost:3001/filters')
+        dispatch(filtersFetching());
+        request("http://localhost:3001/filters")
             .then(data => dispatch(filtersFetched(data)))
             .catch(() => dispatch(filtersFetchingError()))
+
         // eslint-disable-next-line
-    }, [request])
+    }, []);
 
     if (filtersLoadingStatus === 'loading') {
         return <Spinner />
     } else if (filtersLoadingStatus === 'error') {
-        return <div></div>
+        return <h5 className="text-center mt-5">Ошибка загрузки</h5>
     }
 
     const renderFilters = (arr) => {
@@ -41,14 +43,14 @@ const HeroesFilters = () => {
 
             // Используем библиотеку classnames и формируем классы динамически
             const btnClass = classNames('btn', className, {
-                'active': name === activeFilters
+                'active': name === activeFilter
             });
 
             return <button
                 key={name}
                 id={name}
                 className={btnClass}
-                onClick={() => dispatch(activeFiltersChanged(name))}
+                onClick={() => dispatch(activeFilterChanged(name))}
             >{label}</button>
         })
     }
