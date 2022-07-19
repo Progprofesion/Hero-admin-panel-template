@@ -1,9 +1,4 @@
-import { useHttp } from '../../hooks/http.hook';
-import { useEffect } from 'react';
-import { useDispatch, useSelector } from 'react-redux';
-import { filtersFetching, filtersFetched, filtersFetchingError, activeFilterChanged } from '../../actions/index';
-import Spinner from '../spinner/Spinner';
-import classNames from 'classnames';
+
 // Задача для этого компонента:
 // Фильтры должны формироваться на основании загруженных данных
 // Фильтры должны отображать только нужных героев при выборе
@@ -11,10 +6,17 @@ import classNames from 'classnames';
 // Изменять json-файл для удобства МОЖНО!
 // Представьте, что вы попросили бэкенд-разработчика об этом
 
+import { useHttp } from '../../hooks/http.hook';
+import { useEffect } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
+import { filtersFetching, filtersFetched, filtersFetchingError, activeFilterChanged } from '../../actions/index';
+
+import Spinner from '../spinner/Spinner';
+import classNames from 'classnames';
+
 const HeroesFilters = () => {
 
-    const { filters, activeFilter, filtersLoadingStatus } = useSelector(state => state)
-
+    const { filters, activeFilter, filtersLoadingStatus } = useSelector(state => state);
     const { request } = useHttp();
     const dispatch = useDispatch();
 
@@ -23,35 +25,29 @@ const HeroesFilters = () => {
         request("http://localhost:3001/filters")
             .then(data => dispatch(filtersFetched(data)))
             .catch(() => dispatch(filtersFetchingError()))
-
         // eslint-disable-next-line
     }, []);
 
     if (filtersLoadingStatus === 'loading') {
         return <Spinner />
     } else if (filtersLoadingStatus === 'error') {
-        return <h5 className="text-center mt-5">Ошибка загрузки</h5>
+        return <div>error</div>
     }
 
     const renderFilters = (arr) => {
         if (arr.length === 0) {
-            return <h5 className="text-center mt-5">Фильтры не найдены</h5>
+            return <div>not filters</div>
         }
-
-        // Данные в json-файле я расширил классами и текстом
         return arr.map(({ name, className, label }) => {
-
-            // Используем библиотеку classnames и формируем классы динамически
             const btnClass = classNames('btn', className, {
                 'active': name === activeFilter
-            });
-
+            })
             return <button
                 key={name}
-                id={name}
+                name={name}
                 className={btnClass}
-                onClick={() => dispatch(activeFilterChanged(name))}
-            >{label}</button>
+                onClick={() => dispatch(activeFilterChanged(name))}>
+                {label}</button>
         })
     }
 

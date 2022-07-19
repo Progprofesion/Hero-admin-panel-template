@@ -17,36 +17,6 @@
       "name": "Первый герой",
       "description": "Первый герой в рейтинге!",
       "element": "fire"
-    },
-    {
-      "id": 18,
-      "name": "Морской герой",
-      "description": "Как аквамен, но не из DC",
-      "element": "water"
-    },
-    {
-      "id": "73fbc88c-9d01-4b7f-9e58-4599cc49b73f",
-      "name": "Дмитрий",
-      "description": "Все умею!",
-      "element": ""
-    },
-    {
-      "id": "26448c8c-c654-4294-a2d9-c02761842960",
-      "name": "Ирина",
-      "description": "Моя любовь!",
-      "element": "fire"
-    },
-    {
-      "id": "74cc1de9-6852-442e-9abd-4567d5762475",
-      "name": "Полина",
-      "description": "Пока-что какать",
-      "element": "fire"
-    },
-    {
-      "id": "c1b16873-ef79-4cd4-8bdd-d94205771729",
-      "name": "ннгшлт",
-      "description": "ш7о8л",
-      "element": "wind"
     }
   ],
   "filters": [
