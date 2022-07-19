@@ -50,7 +50,7 @@ export const activeFilterChanged = (filter) => {
     }
 }
 
-export const createHero = (hero) => {
+export const heroCreated = (hero) => {
     return {
         type: 'HERO_CREATED',
         payload: hero

@@ -59,7 +59,7 @@ const reducer = (state = initialState, action) => {
                     state.heroes.filter(item => item.element === action.payload)
             }
         case 'HERO_CREATED':
-            const newCreateHeroList = [...state.heroes, ...action.payload]
+            let newCreateHeroList = [...state.heroes, action.payload]
             return {
                 ...state,
                 heroes: newCreateHeroList,
