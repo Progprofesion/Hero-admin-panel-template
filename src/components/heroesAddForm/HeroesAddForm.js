@@ -9,12 +9,13 @@
 // Дополнительно:
 // Элементы <option></option> желательно сформировать на базе
 // данных из фильтров
+
 import { useHttp } from '../../hooks/http.hook';
 import { useDispatch, useSelector } from 'react-redux';
 import { useState } from 'react';
 import { v4 as uuidv4 } from 'uuid';
 
-import { heroCreated } from '../../actions';
+import { createHeroes } from '../../actions';
 
 const HeroesAddForm = () => {
 
@@ -22,13 +23,13 @@ const HeroesAddForm = () => {
     const [heroDescr, setHeroDescr] = useState('');
     const [heroElement, setHeroElement] = useState('');
 
+    const { filters, filtersLoadingStatus } = useSelector(state => state);
+
     const { request } = useHttp();
     const dispatch = useDispatch();
 
-    const { filters, filtersLoadingStatus } = useSelector(state => state)
-
-    const onSubmithHandler = (e) => {
-        e.preventDefault();
+    const onSubmitHandler = (e) => {
+        e.preventDefault()
 
         const newHero = {
             id: uuidv4(),
@@ -37,33 +38,35 @@ const HeroesAddForm = () => {
             element: heroElement
         }
 
-        request("http://localhost:3001/heroes", "POST", JSON.stringify(newHero))
-            .then(res => console.log(res, 'Отправка успешна'))
-            .then(dispatch(heroCreated(newHero)))
-            .catch(err => console.log(err));
+        request('http://localhost:3001/heroes', 'POST', JSON.stringify(newHero))
+            .then(res => console.log(res, 'Успешно'))
+            .then(dispatch(createHeroes(newHero)))
+            .catch(err => console.log(err))
 
         setHeroName('');
         setHeroDescr('');
         setHeroElement('');
+
     }
 
     const renderFilters = (filters, status) => {
-        if (status === "loading") {
-            return <option>Загрузка элементов</option>
-        } else if (status === "error") {
-            return <option>Ошибка загрузки</option>
+        if (status === 'loading') {
+            return <option>Loading</option>
+        } else if (status === 'error') {
+            <option>Error</option>
         }
+
         if (filters && filters.length > 0) {
             return filters.map(({ name, label }) => {
                 if (name === 'all') return;
-
                 return <option key={name} value={name}>{label}</option>
             })
         }
+
     }
 
     return (
-        <form className="border p-4 shadow-lg rounded" onSubmit={onSubmithHandler}>
+        <form className="border p-4 shadow-lg rounded" onSubmit={onSubmitHandler}>
             <div className="mb-3">
                 <label htmlFor="name" className="form-label fs-4">Имя нового героя</label>
                 <input

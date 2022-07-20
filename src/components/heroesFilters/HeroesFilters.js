@@ -7,46 +7,47 @@
 // Представьте, что вы попросили бэкенд-разработчика об этом
 
 import { useHttp } from '../../hooks/http.hook';
-import { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
+import { useEffect } from 'react';
 import { filtersFetching, filtersFetched, filtersFetchingError, activeFilterChanged } from '../../actions/index';
 
-import Spinner from '../spinner/Spinner';
 import classNames from 'classnames';
+
+import Spinner from '../spinner/Spinner';
 
 const HeroesFilters = () => {
 
-    const { filters, activeFilter, filtersLoadingStatus } = useSelector(state => state);
+    const { filters, filtersLoadingStatus, activeFilters } = useSelector(state => state);
     const { request } = useHttp();
     const dispatch = useDispatch();
 
     useEffect(() => {
-        dispatch(filtersFetching());
-        request("http://localhost:3001/filters")
+        dispatch(filtersFetching())
+        request('http://localhost:3001/filters')
             .then(data => dispatch(filtersFetched(data)))
             .catch(() => dispatch(filtersFetchingError()))
-        // eslint-disable-next-line
-    }, []);
+    }, [])
 
     if (filtersLoadingStatus === 'loading') {
         return <Spinner />
     } else if (filtersLoadingStatus === 'error') {
-        return <div>error</div>
+        return <div>Error</div>
     }
 
     const renderFilters = (arr) => {
         if (arr.length === 0) {
-            return <div>not filters</div>
+            return <h5 className="text-center mt-5">Фильтры не найдены</h5>
         }
-        return arr.map(({ name, className, label }) => {
+        return arr.map(({ name, label, className }) => {
             const btnClass = classNames('btn', className, {
-                'active': name === activeFilter
+                'active': name === activeFilters
             })
             return <button
                 key={name}
-                name={name}
                 className={btnClass}
+                id={name}
                 onClick={() => dispatch(activeFilterChanged(name))}>
+
                 {label}</button>
         })
     }
