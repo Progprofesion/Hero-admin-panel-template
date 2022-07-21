@@ -25,12 +25,6 @@
       "element": "wind"
     },
     {
-      "id": 12,
-      "name": "Неизвестный герой",
-      "description": "Скрывающийся в тени",
-      "element": "wind"
-    },
-    {
       "id": 13,
       "name": "Морской герой",
       "description": "Как аквамен, но не из DC",
@@ -77,6 +71,18 @@
       "name": "sad",
       "description": "asd",
       "element": "fire"
+    },
+    {
+      "id": "288e21e5-b2a0-4503-9048-f4fea0d6805d",
+      "name": "asd",
+      "description": "asd",
+      "element": "earth"
+    },
+    {
+      "id": "27ebff4f-191f-4373-9fd4-e7234d2d1f0f",
+      "name": "sad",
+      "description": "asd",
+      "element": "water"
     }
   ],
   "filters": [
