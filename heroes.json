@@ -67,12 +67,6 @@
       "element": "fire"
     },
     {
-      "id": "4ff8eaa7-29e4-429c-8a06-61f7927e52a9",
-      "name": "sad",
-      "description": "asd",
-      "element": "fire"
-    },
-    {
       "id": "288e21e5-b2a0-4503-9048-f4fea0d6805d",
       "name": "asd",
       "description": "asd",
@@ -81,6 +75,12 @@
     {
       "id": "27ebff4f-191f-4373-9fd4-e7234d2d1f0f",
       "name": "sad",
+      "description": "asd",
+      "element": "water"
+    },
+    {
+      "id": "1fe4f27c-b687-4241-8049-dd5fbce5b34c",
+      "name": "asd",
       "description": "asd",
       "element": "water"
     }

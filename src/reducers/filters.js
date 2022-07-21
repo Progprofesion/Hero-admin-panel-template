@@ -22,6 +22,11 @@ const filters = (state = initialState, action) => {
                 ...state,
                 filtersLoadingStatus: 'error'
             }
+        case 'ACTIVE_FILTER_CHANGED':
+            return {
+                ...state,
+                activeFilter: action.payload,
+            }
         default: return state
     }
 }
