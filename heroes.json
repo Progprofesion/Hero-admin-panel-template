@@ -11,18 +11,6 @@
       "name": "Неизвестный герой",
       "description": "Скрывающийся в тени",
       "element": "wind"
-    },
-    {
-      "id": 11,
-      "name": "Первый герой",
-      "description": "Первый герой в рейтинге!",
-      "element": "fire"
-    },
-    {
-      "id": "44319129-4487-4216-a2f4-1534249438e6",
-      "name": "dd",
-      "description": "dd",
-      "element": ""
     }
   ],
   "filters": [
