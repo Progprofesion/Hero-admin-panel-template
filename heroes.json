@@ -13,52 +13,16 @@
       "element": "wind"
     },
     {
-      "id": 3,
-      "name": "Морской герой",
-      "description": "Как аквамен, но не из DC",
-      "element": "water"
-    },
-    {
-      "id": 4,
-      "name": "Первый герой",
-      "description": "Первый герой в рейтинге!",
-      "element": "fire"
-    },
-    {
-      "id": 6,
-      "name": "Первый герой",
-      "description": "Первый герой в рейтинге!",
-      "element": "fire"
-    },
-    {
-      "id": 7,
-      "name": "Неизвестный герой",
-      "description": "Скрывающийся в тени",
-      "element": "wind"
-    },
-    {
       "id": 8,
       "name": "Морской герой",
       "description": "Как аквамен, но не из DC",
       "element": "water"
     },
     {
-      "id": 9,
-      "name": "Первый герой",
-      "description": "Первый герой в рейтинге!",
-      "element": "fire"
-    },
-    {
       "id": 10,
       "name": "Неизвестный герой",
       "description": "Скрывающийся в тени",
       "element": "wind"
-    },
-    {
-      "id": 11,
-      "name": "Первый герой",
-      "description": "Первый герой в рейтинге!",
-      "element": "fire"
     },
     {
       "id": 12,
@@ -103,20 +67,14 @@
       "element": "water"
     },
     {
-      "id": 19,
-      "name": "Первый герой",
-      "description": "Первый герой в рейтинге!",
+      "id": "2f71fc51-65f6-4db8-a581-d4194a4d186a",
+      "name": "asd",
+      "description": "adsd",
       "element": "fire"
     },
     {
-      "id": 20,
-      "name": "Неизвестный герой",
-      "description": "Скрывающийся в тени",
-      "element": "wind"
-    },
-    {
-      "id": "9e4633f4-9314-4f38-aee2-f5de35c9e94e",
-      "name": "asd",
+      "id": "4ff8eaa7-29e4-429c-8a06-61f7927e52a9",
+      "name": "sad",
       "description": "asd",
       "element": "fire"
     }
