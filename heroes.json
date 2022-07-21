@@ -11,6 +11,18 @@
       "name": "Неизвестный герой",
       "description": "Скрывающийся в тени",
       "element": "wind"
+    },
+    {
+      "id": "15f74d55-2a52-4ad3-9587-100152f8845b",
+      "name": "asdad",
+      "description": "asd",
+      "element": "fire"
+    },
+    {
+      "id": "3088c081-47b8-4fff-956d-7c00063b1244",
+      "name": "asd",
+      "description": "asd",
+      "element": "water"
     }
   ],
   "filters": [
