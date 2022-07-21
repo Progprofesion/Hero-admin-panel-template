@@ -2,7 +2,7 @@ import { useHttp } from '../../hooks/http.hook';
 import { useEffect, useCallback } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 
-import { heroesFetching, heroesFetched, heroesFetchingError, heroesDeleted } from '../../actions';
+import { heroesFetching, heroesFetched, heroesFetchingError, heroDelete } from '../../actions';
 import HeroesListItem from "../heroesListItem/HeroesListItem";
 import Spinner from '../spinner/Spinner';
 
@@ -27,9 +27,9 @@ const HeroesList = () => {
 
     const onDelete = useCallback((id) => {
         request(`http://localhost:3001/heroes/${id}`, 'DELETE')
-            .then(res => console.log(res, 'успешно'))
-            .then(dispatch(heroesDeleted(id)))
-            .catch(err => console.log(err))
+            .then(res => console.log(res, 'Удаление успешно'))
+            .then(dispatch(heroDelete(id)))
+            .catch((err) => console.log(err))
         // eslint-disable-next-line
     }, [])
 
