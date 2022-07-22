@@ -1,6 +1,8 @@
 import { useHttp } from '../../hooks/http.hook';
+import React from 'react'
 import { useEffect, useCallback } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
+// import { createSelector } from '@reduxjs/toolkit';
 
 import { CSSTransition, TransitionGroup } from 'react-transition-group';
 
@@ -18,6 +20,7 @@ import './heroesList.scss';
 const HeroesList = () => {
     const filteredHeroes = useSelector(state => {
         if (state.filters.activeFilter === 'all') {
+            console.log('render');
             return state.heroes.heroes
         } else {
             return state.heroes.heroes.filter(item => item.element === state.filters.activeFilter)

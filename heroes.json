@@ -19,18 +19,6 @@
       "element": "water"
     },
     {
-      "id": 10,
-      "name": "Неизвестный герой",
-      "description": "Скрывающийся в тени",
-      "element": "wind"
-    },
-    {
-      "id": 13,
-      "name": "Морской герой",
-      "description": "Как аквамен, но не из DC",
-      "element": "water"
-    },
-    {
       "id": 14,
       "name": "Первый герой",
       "description": "Первый герой в рейтинге!",
