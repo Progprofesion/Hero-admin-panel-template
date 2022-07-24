@@ -1,4 +1,5 @@
 import { createAction } from "@reduxjs/toolkit";
+import { heroesFetching, heroesFetched, heroesFetchingError } from '../components/heroesList/heroesSlice';
 
 export const fetchHeroes = (request) => (dispatch) => {
     dispatch(heroesFetching());
@@ -14,15 +15,6 @@ export const fetchFilters = (request) => (dispatch) => {
         .catch(() => dispatch(filtersFetchingError()))
 }
 
-export const heroesFetching = createAction('HEROES_FETCHING')
-
-export const heroesFetched = createAction('HEROES_FETCHED')
-
-export const heroesFetchingError = () => {
-    return {
-        type: 'HEROES_FETCHING_ERROR'
-    }
-}
 
 export const filtersFetching = () => {
     return {
@@ -52,23 +44,6 @@ export const activeFilterChanged = (filter) => {
     }
 }
 
-export const heroesCreate = createAction('HEROES_CREATE')
-
-// export const heroesCreate = (hero) => {
-//     return {
-//         type: 'HEROES_CREATE',
-//         payload: hero
-//     }
-// }
-
-export const heroDelete = createAction('HERO_DELETE')
-
-// export const heroDelete = (id) => {
-//     return {
-//         type: 'HERO_DELETE',
-//         payload: id
-//     }
-// }
 
 
 

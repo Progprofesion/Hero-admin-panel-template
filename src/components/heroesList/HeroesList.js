@@ -6,7 +6,8 @@ import { createSelector } from '@reduxjs/toolkit';
 
 import { CSSTransition, TransitionGroup } from 'react-transition-group';
 
-import { fetchHeroes, heroDelete } from '../../actions';
+import { fetchHeroes } from '../../actions';
+import { heroDelete } from '../heroesList/heroesSlice';
 import HeroesListItem from "../heroesListItem/HeroesListItem";
 import Spinner from '../spinner/Spinner';
 
