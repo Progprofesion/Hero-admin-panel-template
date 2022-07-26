@@ -1,47 +1,44 @@
-import { useHttp } from '../../hooks/http.hook';
-import React from 'react'
-import { useEffect, useCallback } from 'react';
-import { useDispatch, useSelector } from 'react-redux';
+import { useCallback, useMemo } from 'react';
+import { useSelector } from 'react-redux';
+
+import { useGetHeroesQuery, useDeleteHeroMutation } from '../../api/apiSlice';
 
 import { CSSTransition, TransitionGroup } from 'react-transition-group';
 
-import { heroDelete, fetchHeroes, filteredHeroesSelector } from './heroesSlice';
 import HeroesListItem from "../heroesListItem/HeroesListItem";
 import Spinner from '../spinner/Spinner';
 
 import './heroesList.scss';
 
-// Задача для этого компонента:
-// При клике на "крестик" идет удаление персонажа из общего состояния
-// Усложненная задача:
-// Удаление идет и с json файла при помощи метода DELETE
-
 const HeroesList = () => {
 
+    const {
+        data: heroes = [],
+        isLoading,
+        isError
+    } = useGetHeroesQuery();
+
+    const activeFilter = useSelector(state => state.filters.activeFilter);
+    const [deleteHero] = useDeleteHeroMutation();
 
 
-    const filteredHeroes = useSelector(filteredHeroesSelector)
-    const heroesLoadingStatus = useSelector(state => state.heroes.heroesLoadingStatus);
-    const dispatch = useDispatch();
-    const { request } = useHttp();
-
-    useEffect(() => {
-        dispatch(fetchHeroes());
-
-        // eslint-disable-next-line
-    }, []);
+    const filteredHeroes = useMemo(() => {
+        const filteredHeroes = heroes.slice();
+        if (activeFilter === 'all') {
+            return filteredHeroes;
+        } else {
+            return filteredHeroes.filter(item => item.element === activeFilter);
+        }
+    }, [heroes, activeFilter]);
 
     const onDelete = useCallback((id) => {
-        request(`http://localhost:3001/heroes/${id}`, 'DELETE')
-            .then(res => console.log(res, 'Удаление успешно'))
-            .then(dispatch(heroDelete(id)))
-            .catch((err) => console.log(err))
+        deleteHero(id)
         // eslint-disable-next-line
     }, [])
 
-    if (heroesLoadingStatus === "loading") {
+    if (isLoading) {
         return <Spinner />;
-    } else if (heroesLoadingStatus === "error") {
+    } else if (isError) {
         return <h5 className="text-center mt-5">Ошибка загрузки</h5>
     }
 

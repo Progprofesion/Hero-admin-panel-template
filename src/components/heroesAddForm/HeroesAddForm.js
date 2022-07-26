@@ -1,10 +1,8 @@
-
-import { useHttp } from '../../hooks/http.hook';
 import { useState } from 'react';
-import { useDispatch, useSelector } from 'react-redux';
+import { useSelector } from 'react-redux';
 import { v4 as uuidv4 } from 'uuid';
+import { useCreateHeroMutation } from '../../api/apiSlice';
 
-import { heroesCreate } from '../heroesList/heroesSlice';
 import { selectAll } from '../heroesFilters/filtersSlice';
 import store from '../../store/index';
 
@@ -16,10 +14,9 @@ const HeroesAddForm = () => {
 
     const { filtersLoadingStatus } = useSelector(state => state.filters);
 
-    const filters = selectAll(store.getState());
+    const [createHero] = useCreateHeroMutation();
 
-    const { request } = useHttp();
-    const dispatch = useDispatch();
+    const filters = selectAll(store.getState());
 
     const onSubmitHandler = (e) => {
         e.preventDefault();
@@ -31,10 +28,7 @@ const HeroesAddForm = () => {
             element: heroElement
         }
 
-        request('http://localhost:3001/heroes', 'POST', JSON.stringify(newHero))
-            .then(res => console.log(res, 'Создание успешно'))
-            .then(dispatch(heroesCreate(newHero)))
-            .catch(err => console.log(err))
+        createHero(newHero).unwrap();
 
         setHeroName('');
         setHeroDescr('');
