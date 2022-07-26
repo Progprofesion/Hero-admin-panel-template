@@ -1,25 +1,27 @@
 
 import { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { fetchFilters, activeFilterChanged, selectAll } from './filtersSlice';
+import { activeFilterChanged, selectAll, fetchFilters } from './filtersSlice';
 import { useHttp } from '../../hooks/http.hook';
 
+import store from '../../store/index';
 
 import classNames from 'classnames';
-import store from '../../store/index';
 
 import Spinner from '../spinner/Spinner';
 
 const HeroesFilters = () => {
 
     const { filtersLoadingStatus, activeFilter } = useSelector(state => state.filters);
+
     const filters = selectAll(store.getState());
-    const dispatch = useDispatch();
+
     const { request } = useHttp();
+    const dispatch = useDispatch();
+
 
     useEffect(() => {
         dispatch(fetchFilters(request));
-
         // eslint-disable-next-line
     }, []);
 
@@ -34,10 +36,8 @@ const HeroesFilters = () => {
             return <h5 className="text-center mt-5">Фильтры не найдены</h5>
         }
 
-        // Данные в json-файле я расширил классами и текстом
         return arr.map(({ name, className, label }) => {
 
-            // Используем библиотеку classnames и формируем классы динамически
             const btnClass = classNames('btn', className, {
                 'active': name === activeFilter
             });
