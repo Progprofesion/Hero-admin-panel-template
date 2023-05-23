@@ -1,0 +1,14 @@
+{
+  "files": {
+    "main.css": "/Hero-admin-panel-template/static/css/main.14238ab8.css",
+    "main.js": "/Hero-admin-panel-template/static/js/main.d2b26f14.js",
+    "static/media/hero_bg.jpg": "/Hero-admin-panel-template/static/media/hero_bg.0540b794b0424b67d780.jpg",
+    "index.html": "/Hero-admin-panel-template/index.html",
+    "main.14238ab8.css.map": "/Hero-admin-panel-template/static/css/main.14238ab8.css.map",
+    "main.d2b26f14.js.map": "/Hero-admin-panel-template/static/js/main.d2b26f14.js.map"
+  },
+  "entrypoints": [
+    "static/css/main.14238ab8.css",
+    "static/js/main.d2b26f14.js"
+  ]
+}
